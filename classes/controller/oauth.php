@@ -63,11 +63,6 @@ class Controller_OAuth extends Controller {
 	
 	// 使用授权后的Request Token换取Access Toke
 	public function action_access() {
-		$filename = DOCROOT . 'data/access.txt';
-		file_put_contents($filename, date('Y-m-d H:i:s') . 'header ' . json_encode($this->request->headers()) . PHP_EOL, FILE_APPEND);
-		file_put_contents($filename, date('Y-m-d H:i:s') . '$_REQUEST ' . json_encode($_REQUEST) . PHP_EOL, FILE_APPEND);
-		file_put_contents($filename, date('Y-m-d H:i:s') . 'METHOD ' . $this->request->method() . PHP_EOL, FILE_APPEND);
-			
 		$result = array('status' => '400');
 		// xauth
 		$x_auth_mode = Arr::get($_REQUEST, 'x_auth_mode');
@@ -149,13 +144,7 @@ class Controller_OAuth extends Controller {
 		$this->sendQuery($result);
 	}
 	
-	public function action_test() {	
-		$filename = DOCROOT . 'data/test.txt';
-		file_put_contents($filename, date('Y-m-d H:i:s') . 'header ' . json_encode($this->request->headers()) . PHP_EOL, FILE_APPEND);
-		file_put_contents($filename, date('Y-m-d H:i:s') . '$_REQUEST ' . json_encode($_REQUEST) . PHP_EOL, FILE_APPEND); 
-		file_put_contents($filename, date('Y-m-d H:i:s') . 'body ' . $this->request->body() . PHP_EOL, FILE_APPEND); 
-		file_put_contents($filename, date('Y-m-d H:i:s') . 'METHOD ' . $this->request->method() . PHP_EOL, FILE_APPEND);
-			
+	public function action_test() {				
 		$result = array('status' => '400');
 		$provider = new OAuth_Provider();
 		try {
